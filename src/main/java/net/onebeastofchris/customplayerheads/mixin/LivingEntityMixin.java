@@ -9,6 +9,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 import net.onebeastofchris.customplayerheads.CustomPlayerHeads;
 import net.onebeastofchris.customplayerheads.utils.TextureUtils;
@@ -32,24 +33,24 @@ public abstract class LivingEntityMixin extends Entity {
     private final LivingEntity livingEntity = (LivingEntity) (Object) this;
 
     @Inject(method = "dropLoot", at = @At("TAIL"))
-    private void gph$dropHead(DamageSource source, boolean causedByPlayer, CallbackInfo ci) {
+    private void gph$dropHead(ServerWorld world, DamageSource damageSource, boolean causedByPlayer, CallbackInfo ci) {
         if (this.livingEntity instanceof ServerPlayerEntity player && CustomPlayerHeads.config.isShouldDropHeadsOnDeath()) {
             ItemStack skull = Items.PLAYER_HEAD.getDefaultStack();
 
             skull.set(DataComponentTypes.PROFILE, new ProfileComponent(player.getGameProfile()));
             skull.set(DataComponentTypes.CUSTOM_NAME, TextureUtils.customNameComponent(player.getNameForScoreboard()));
 
-            if (source.getAttacker() instanceof ServerPlayerEntity killer) {
+            if (damageSource.getAttacker() instanceof ServerPlayerEntity killer) {
                 if (CustomPlayerHeads.config.isShowLore()) {
                     skull.set(DataComponentTypes.LORE, TextureUtils.getLoreComponent(killer));
                 }
-                this.dropStack(skull);
+                this.dropStack(world, skull);
                 return;
             }
 
             // case: player killed by non-player
             if (CustomPlayerHeads.config.isDropNonPlayerKillHeads()) {
-                this.dropStack(skull);
+                this.dropStack(world, skull);
             }
         }
     }

@@ -76,7 +76,7 @@ public class SkullCommand {
     public static void noArgs(CommandContext<ServerCommandSource> ctx) {
         final ServerCommandSource source = ctx.getSource();
         if (source.getEntity() instanceof PlayerEntity self) {
-            self.sendMessage(Text.literal("Usage: /getskull <JavaPlayer> or /getskull bedrock <BedrockPlayer>").formatted(Formatting.RED));
+            self.sendMessage(Text.literal("Usage: /getskull <JavaPlayer> or /getskull bedrock <BedrockPlayer>").formatted(Formatting.RED), false);
         } else {
             source.sendError(Text.of("You must be a player to use this command."));
         }
@@ -128,9 +128,9 @@ public class SkullCommand {
             }
         } catch (Exception e) {
             if (isBedrock) {
-                self.sendMessage(Text.literal("Failed to get the skin file of the Bedrock player. Ask " + target + " to join a Geyser + Floodgate server. ").formatted(Formatting.RED));
+                self.sendMessage(Text.literal("Failed to get the skin file of the Bedrock player. Ask " + target + " to join a Geyser + Floodgate server. ").formatted(Formatting.RED), false);
             } else {
-                self.sendMessage(Text.literal("Failed to get the skin file of the Java player.").formatted(Formatting.RED));
+                self.sendMessage(Text.literal("Failed to get the skin file of the Java player.").formatted(Formatting.RED), false);
             }
             CustomPlayerHeads.getLogger().debug(e.getMessage(), e);
             return;
@@ -139,6 +139,6 @@ public class SkullCommand {
         head.set(DataComponentTypes.CUSTOM_NAME, TextureUtils.customNameComponent(target));
 
         self.getInventory().insertStack(head);
-        self.sendMessage(Text.literal("Got the head of the player: " + target).formatted(Formatting.GREEN));
+        self.sendMessage(Text.literal("Got the head of the player: " + target).formatted(Formatting.GREEN), false);
     }
 }
