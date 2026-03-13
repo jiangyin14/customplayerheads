@@ -8,33 +8,32 @@ import org.spongepowered.configurate.objectmapping.meta.Comment;
 @SuppressWarnings("FieldMayBeFinal")
 public final class CPHConfig {
 
-    @Comment("Should the heads drop on death?")
+    @Comment("是否在死亡时掉落头颅？")
     private boolean shouldDropHeadsOnDeath = true;
 
-    @Comment("Whether to show lore \"killed by <player>\" on heads dropped by players.")
+    @Comment("是否在被玩家击杀掉落的头颅上显示\"被 <玩家> 击杀\"的描述信息。")
     private boolean showLore = true;
 
-    @Comment("Whether non-player-deaths drop heads. (e.g. mobs, explosions, fall damage, etc.)")
+    @Comment("非玩家击杀是否也掉落头颅（例如：怪物、爆炸、摔落伤害等）。")
     private boolean dropNonPlayerKillHeads = false;
 
-    @Comment("Whether to enable the /getskull command to allow player with the command permission level below to get a skull of a player.")
+    @Comment("是否启用 /getskull 命令，允许拥有以下权限等级的玩家获取其他玩家的头颅。")
     private boolean commandEnabled = true;
 
-    @Comment("The permission level required to use the /getskull command.")
+    @Comment("使用 /getskull 命令所需的权限等级。")
     private int commandPermissionLevel = 2;
 
-    @Comment("For Geyser/Floodgate users:" +
-            "Whether to include the Floodgate prefix in the name of the head. (e.g. .steve instead of steve)")
+    @Comment("Geyser/Floodgate 用户专用：是否在头颅名称中包含 Floodgate 前缀（例如 .steve 而非 steve）。")
     private boolean showFloodgatePrefix = true;
 
-    @Comment("Whether to enable debug mode. This will log more information to the console.")
+    @Comment("是否启用调试模式。启用后将在控制台输出更多信息。")
     private boolean debug = false;
 
-    @Comment("What should the lore say?")
-    private String lore = "Killed by %player%";
+    @Comment("头颅的描述信息内容是什么？")
+    private String lore = "被 %player% 击杀";
 
-    @Comment("What should the name of the head be?")
-    private String name = "%player%'s Head";
+    @Comment("头颅的名称应该是什么？")
+    private String name = "%player% 的头颅";
 
     public boolean isShouldDropHeadsOnDeath() {
         return shouldDropHeadsOnDeath;

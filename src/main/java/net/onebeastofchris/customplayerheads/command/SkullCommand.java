@@ -62,7 +62,7 @@ public class SkullCommand {
                                                 })
                                                 .executes(SkullCommand::bRun)
                                 ).executes((context -> {
-                                    context.getSource().sendError(Text.of("You must specify a Bedrock player name."));
+                                    context.getSource().sendError(Text.of("请指定一个基岩版玩家名称。"));
                                     return 0;
                                 }))
                         )
@@ -76,16 +76,16 @@ public class SkullCommand {
     public static void noArgs(CommandContext<ServerCommandSource> ctx) {
         final ServerCommandSource source = ctx.getSource();
         if (source.getEntity() instanceof PlayerEntity self) {
-            self.sendMessage(Text.literal("Usage: /getskull <JavaPlayer> or /getskull bedrock <BedrockPlayer>").formatted(Formatting.RED), false);
+            self.sendMessage(Text.literal("用法：/getskull <Java玩家> 或 /getskull bedrock <基岩版玩家>").formatted(Formatting.RED), false);
         } else {
-            source.sendError(Text.of("You must be a player to use this command."));
+            source.sendError(Text.of("你必须是一名玩家才能使用此命令。"));
         }
     }
 
     private static int jRun(CommandContext<ServerCommandSource> context) {
         final PlayerEntity self = context.getSource().getPlayer();
         if (self == null) {
-            context.getSource().sendError(Text.of("You must be a player to use this command."));
+            context.getSource().sendError(Text.of("你必须是一名玩家才能使用此命令。"));
             return 0;
         } else {
             try (ExecutorService service = Executors.newSingleThreadExecutor()) {
@@ -98,7 +98,7 @@ public class SkullCommand {
     private static int bRun(CommandContext<ServerCommandSource> context) {
         final PlayerEntity self = context.getSource().getPlayer();
         if (self == null) {
-            context.getSource().sendError(Text.of("You must be a player to use this command."));
+            context.getSource().sendError(Text.of("你必须是一名玩家才能使用此命令。"));
             return 0;
         } else {
             try (ExecutorService service = Executors.newSingleThreadExecutor()) {
@@ -128,9 +128,9 @@ public class SkullCommand {
             }
         } catch (Exception e) {
             if (isBedrock) {
-                self.sendMessage(Text.literal("Failed to get the skin file of the Bedrock player. Ask " + target + " to join a Geyser + Floodgate server. ").formatted(Formatting.RED), false);
+                self.sendMessage(Text.literal("获取基岩版玩家皮肤文件失败。请让 " + target + " 加入一个 Geyser + Floodgate 服务器。").formatted(Formatting.RED), false);
             } else {
-                self.sendMessage(Text.literal("Failed to get the skin file of the Java player.").formatted(Formatting.RED), false);
+                self.sendMessage(Text.literal("获取 Java 版玩家皮肤文件失败。").formatted(Formatting.RED), false);
             }
             CustomPlayerHeads.getLogger().debug(e.getMessage(), e);
             return;
@@ -139,6 +139,6 @@ public class SkullCommand {
         head.set(DataComponentTypes.CUSTOM_NAME, TextureUtils.customNameComponent(target));
 
         self.getInventory().insertStack(head);
-        self.sendMessage(Text.literal("Got the head of the player: " + target).formatted(Formatting.GREEN), false);
+        self.sendMessage(Text.literal("已获取玩家头颅：" + target).formatted(Formatting.GREEN), false);
     }
 }
