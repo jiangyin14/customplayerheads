@@ -14,7 +14,7 @@ public class FloodgateUtil {
     public static boolean isFloodgatePresent() {
         boolean isFloodgatePresent = FabricLoader.getInstance().isModLoaded("floodgate");
         if (!isFloodgatePresent && !warned) {
-            CustomPlayerHeads.getLogger().info("Floodgate is not present, but is recommended for this mod to work properly for Bedrock players.");
+            CustomPlayerHeads.getLogger().info("未检测到 Floodgate，但建议安装以使本模组对基岩版玩家正常工作。");
             warned = true;
         }
         return isFloodgatePresent;
@@ -25,7 +25,7 @@ public class FloodgateUtil {
         if (!isFloodgatePresent()) {
             return fallback(uuid, playerName);
         } else if (FloodgateApi.getInstance() == null) {
-            CustomPlayerHeads.getLogger().info("Floodgate seems to be installed, but CustomPlayerHeads cannot access it. Please report this as an issue on the GitHub page!");
+            CustomPlayerHeads.getLogger().info("Floodgate 似乎已安装，但 CustomPlayerHeads 无法访问它。请在 GitHub 页面上报告此问题！");
             return fallback(uuid, playerName);
         }
 
@@ -36,7 +36,7 @@ public class FloodgateUtil {
         if (!isFloodgatePresent()) {
             return ".";
         } else if (FloodgateApi.getInstance() == null) {
-            CustomPlayerHeads.getLogger().info("Floodgate seems to be installed, but CustomPlayerHeads cannot access it. Please report this as an issue on the GitHub page!");
+            CustomPlayerHeads.getLogger().info("Floodgate 似乎已安装，但 CustomPlayerHeads 无法访问它。请在 GitHub 页面上报告此问题！");
             return ".";
         } else {
             return FloodgateApi.getInstance().getPlayerPrefix();

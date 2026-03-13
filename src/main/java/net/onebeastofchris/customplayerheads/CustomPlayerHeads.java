@@ -29,11 +29,11 @@ public class CustomPlayerHeads implements ModInitializer {
     public void onInitialize() {
 
         logger = LoggerFactory.getLogger("customplayerheads");
-        logger.info("CustomPlayerHeads starting now");
+        logger.info("CustomPlayerHeads 正在启动");
 
         final HoconConfigurationLoader loader = HoconConfigurationLoader.builder()
                 .path(FabricLoader.getInstance().getConfigDir().resolve(configPath))
-                .defaultOptions(opts -> opts.header("CustomPlayerHeads Configuration"))
+                .defaultOptions(opts -> opts.header("CustomPlayerHeads 配置文件"))
                 .prettyPrinting(true)
                 .build();
 
@@ -42,13 +42,13 @@ public class CustomPlayerHeads implements ModInitializer {
             config = node.get(CPHConfig.class);
             loader.save(node);
         } catch (ConfigurateException e) {
-            getLogger().error("Error while loading config!" + e.getMessage());
+            getLogger().error("加载配置文件时出错！" + e.getMessage());
             throw new RuntimeException(e);
         }
 
         if (config.isCommandEnabled()) {
             CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> SkullCommand.register(dispatcher));
-            logger.debug("/getskull command enabled!");
+            logger.debug("/getskull 命令已启用！");
         }
 
         webUtil = new WebUtil();

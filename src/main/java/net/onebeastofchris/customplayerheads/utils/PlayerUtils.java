@@ -39,16 +39,16 @@ public class PlayerUtils {
         } catch (Exception e) {
             switch (xuidJson.get("message").getAsString()) {
                 case "gamertag is empty or longer than 16 chars" -> {
-                    self.sendMessage(Text.literal("Invalid Bedrock player name.").formatted(Formatting.RED), false);
+                    self.sendMessage(Text.literal("无效的基岩版玩家名称。").formatted(Formatting.RED), false);
                     return null;
                 }
                 case "Unable to find user in our cache. Please try specifying their Floodgate UUID instead" -> {
-                    self.sendMessage(Text.literal("That Bedrock player either does not exist, or has not joined a Geyser server yet.").formatted(Formatting.RED), false);
+                    self.sendMessage(Text.literal("该基岩版玩家不存在，或尚未加入过 Geyser 服务器。").formatted(Formatting.RED), false);
                     return null;
                 }
                 default -> {
                     CustomPlayerHeads.debugLog("GetXuid: " + e.getMessage());
-                    self.sendMessage(Text.literal("An error occurred while trying to get the XUID of that Bedrock player.").formatted(Formatting.RED), false);
+                    self.sendMessage(Text.literal("获取该基岩版玩家的 XUID 时发生错误。").formatted(Formatting.RED), false);
                     return null;
                 }
             }

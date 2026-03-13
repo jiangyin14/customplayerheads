@@ -3,7 +3,7 @@
   "id": "customplayerheads",
   "version": "${version}",
   "name": "CustomPlayerHeads",
-  "description": "A mod that drops player heads. But with support for skin change mods (e.g. FabricTailor), and Geyser players!",
+  "description": "一个掉落玩家头颅的模组。支持换肤模组（如 FabricTailor）以及 Geyser 基岩版玩家！",
   "authors": [
     "onebeastofchris"
   ],
